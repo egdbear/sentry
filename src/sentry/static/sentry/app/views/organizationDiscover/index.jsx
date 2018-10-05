@@ -46,6 +46,11 @@ const OrganizationDiscoverContainer = createReactClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
+    if (!nextProps.params.savedQueryId) {
+      this.setState({savedQuery: null});
+      return;
+    }
+
     if (nextProps.params.savedQueryId !== this.props.params.savedQueryId) {
       this.fetchSavedQuery(nextProps.params.savedQueryId);
     }
@@ -92,7 +97,7 @@ const OrganizationDiscoverContainer = createReactClass({
 
   render() {
     const {isLoading, savedQuery, view} = this.state;
-    const {location} = this.props;
+    const {location, params} = this.props;
     const hasFeature = this.getFeatures().has('discover');
 
     if (!hasFeature) return this.renderComingSoon();
@@ -106,6 +111,7 @@ const OrganizationDiscoverContainer = createReactClass({
             organization={this.getOrganization()}
             queryBuilder={this.queryBuilder}
             location={location}
+            params={params}
             savedQuery={savedQuery}
             updateSavedQueryData={this.updateSavedQuery}
             view={view}
