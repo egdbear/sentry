@@ -153,8 +153,9 @@ export const BackToQueryList = styled('div')`
 `;
 
 export const EditableName = styled(props => (
-  <TextField inputStyle={{height: 24, padding: 2}} {...props} />
+  <TextField inputStyle={{height: 24, padding: 4}} {...props} />
 ))`
+  font-weight: normal;
   color: ${p => p.theme.gray4};
   margin: 0;
 `;
